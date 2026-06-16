@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Villa Solis — Luxury Single Property Showcase | APEX ESTATES</title>
+  <meta name="description" content="An architectural masterpiece suspended over the Pacific. A private Malibu sanctuary crafted from cast concrete, raw limestone, and German thermal glass.">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts: Cormorant Garamond (Serif) & Plus Jakarta Sans (Sans-Serif) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- GSAP & ScrollTrigger CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+  <!-- Tailwind Configuration for Custom Theme Tokens -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['Cormorant Garamond', 'serif'],
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+          },
+          colors: {
+            gold: {
+              DEFAULT: '#C5A880',
+              light: '#D4C3AC',
+              dark: '#A68B62'
+            },
+            carbon: {
+              DEFAULT: '#18191B',
+              light: '#2E3033',
+              dark: '#0C0D0E'
+            },
+            alabaster: {
+              DEFAULT: '#FAF8F5',
+              dark: '#F2ECE4'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* CUSTOM FINE-GRAINED STYLING */
+    .nav-link:hover .nav-link-line {
+      width: 100%;
+    }
+    
+    /* Smooth Scrollbar reset */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #FAF8F5;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #C5A880;
+      border-radius: 3px;
+    }
+  </style>
+</head>
+<body class="bg-alabaster font-sans text-carbon antialiased overflow-x-hidden">
+
+  <!-- ==================== HEADER ==================== -->
+  <header id="main-header" class="fixed top-0 left-0 w-full z-50 transition-all duration-500 ease-out py-8 border-b border-transparent">
+    <div class="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between">
+      <!-- Brand Logo -->
+      <a href="#" class="group flex items-center focus:outline-none">
+        <img id="header-logo" src="assets/logo-light.svg" alt="APEX ESTATES Logo" class="h-8 w-auto object-contain transition-opacity duration-300">
+      </a>
+
+      <!-- Desktop Navigation -->
+      <nav class="hidden md:flex items-center gap-10">
+        <a href="index.html" class="nav-link text-xs tracking-[0.2em] uppercase font-semibold text-gold relative py-1">
+          Villa Solis
+          <span class="absolute bottom-0 left-0 w-full h-[1px] bg-gold"></span>
+        </a>
+        <a href="broker-funnel.html" class="nav-link header-nav-item text-xs tracking-[0.2em] uppercase text-[#FAF8F5]/80 font-medium hover:text-gold transition-colors duration-300 relative py-1">
+          Private Brokerage
+          <span class="absolute bottom-0 left-0 w-0 h-[1px] bg-gold transition-all duration-300 ease-out nav-link-line"></span>
+        </a>
+        <a href="pre-construction.html" class="nav-link header-nav-item text-xs tracking-[0.2em] uppercase text-[#FAF8F5]/80 font-medium hover:text-gold transition-colors duration-300 relative py-1">
+          The Obsidian
+          <span class="absolute bottom-0 left-0 w-0 h-[1px] bg-gold transition-all duration-300 ease-out nav-link-line"></span>
+        </a>
+      </nav>
+
+      <!-- Header Action Button -->
+      <div class="hidden md:flex items-center">
+        <a id="header-btn" href="#inquire" class="group relative px-6 py-3 border border-[#FAF8F5] overflow-hidden transition-all duration-500 ease-out hover:border-gold">
+          <span class="absolute inset-0 w-0 h-full bg-[#FAF8F5] transition-all duration-500 ease-out group-hover:w-full group-hover:bg-gold"></span>
+          <span id="header-btn-text" class="relative z-10 text-[10px] tracking-[0.25em] uppercase text-[#FAF8F5] font-semibold transition-colors duration-500 group-hover:text-carbon">
+            Inquire Private Entry
+          </span>
+        </a>
+      </div>
+
+      <!-- Mobile Navigation Toggle -->
+      <button id="mobile-menu-btn" class="md:hidden flex flex-col justify-between w-6 h-4 focus:outline-none group z-50" aria-label="Toggle Navigation Menu">
+        <span class="mobile-menu-line w-full h-[1px] bg-[#FAF8F5] transition-transform duration-300 origin-left group-[.menu-open]:rotate-45 group-[.menu-open]:translate-y-[2px]"></span>
+        <span class="mobile-menu-line w-2/3 ml-auto h-[1px] bg-[#FAF8F5] transition-all duration-300 group-[.menu-open]:w-0 group-[.menu-open]:opacity-0"></span>
+        <span class="mobile-menu-line w-full h-[1px] bg-[#FAF8F5] transition-transform duration-300 origin-left group-[.menu-open]:-rotate-45 group-[.menu-open]:-translate-y-[2px]"></span>
+      </button>
+    </div>
+
+    <!-- Mobile Drawer Menu -->
+    <div id="mobile-drawer" class="fixed inset-0 w-screen h-screen overflow-y-auto bg-white/90 backdrop-blur-lg z-45 flex flex-col justify-center items-center gap-8 translate-x-full transition-transform duration-500 ease-in-out md:hidden">
+      <a href="index.html" class="text-xl tracking-[0.2em] uppercase text-carbon hover:text-gold transition-colors duration-300">
+        Villa Solis
+      </a>
+      <a href="broker-funnel.html" class="text-xl tracking-[0.2em] uppercase text-carbon hover:text-gold transition-colors duration-300">
+        Private Brokerage
+      </a>
+      <a href="pre-construction.html" class="text-xl tracking-[0.2em] uppercase text-carbon hover:text-gold transition-colors duration-300">
+        The Obsidian
+      </a>
+      <a href="#inquire" class="mt-4 px-8 py-4 bg-carbon text-white text-xs tracking-[0.25em] uppercase hover:bg-gold transition-colors duration-300">
+        Inquire Private Entry
+      </a>
+    </div>
+  </header>
+
+
+  <!-- ==================== CINEMATIC HERO ==================== -->
+  <section class="relative w-full h-screen bg-[#18191B] overflow-hidden flex items-center justify-center">
+    <!-- Hero Background Image with Parallax & Dark Overlay -->
+    <div class="absolute inset-0 z-0 scale-110 overflow-hidden" id="hero-bg-container">
+      <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=2000&q=80" alt="Villa Solis Exterior" class="w-full h-full object-cover object-center opacity-40 transition-transform duration-700 ease-out hover:scale-105">
+      <div class="absolute inset-0 bg-gradient-to-t from-carbon via-transparent to-carbon/50"></div>
+    </div>
+
+    <!-- Hero Content Grid -->
+    <div class="relative z-10 max-w-7xl mx-auto px-6 md:px-12 w-full h-full flex flex-col justify-end pb-20 md:pb-24">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-end">
+        <!-- Titles & Branding -->
+        <div class="md:col-span-8 flex flex-col items-start gap-4">
+          <!-- Coordinates & Subtle Tag -->
+          <div class="flex items-center gap-4 animate-fade-in opacity-0" id="hero-tagline">
+            <span class="text-[10px] tracking-[0.4em] text-gold uppercase font-semibold">MALIBU, CALIFORNIA</span>
+            <span class="w-8 h-[1px] bg-gold/50"></span>
+            <span class="text-[9px] tracking-[0.25em] text-alabaster/60 uppercase font-mono">34.0259° N, 118.7798° W</span>
+          </div>
+          
+          <!-- Massive Editorial Headline -->
+          <h1 class="font-display text-5xl sm:text-6xl md:text-8xl text-alabaster leading-[1.05] tracking-tight font-light capitalize max-w-4xl" id="hero-title">
+            VILLA SOLIS
+          </h1>
+          
+          <!-- Subtitle -->
+          <p class="text-sm md:text-lg text-alabaster/80 max-w-xl font-light leading-relaxed mt-2" id="hero-subtitle">
+            An architectural sanctuary crafted by Studio Ascend. Constructed from cast concrete, raw limestone, and glass, suspended over the Pacific.
+          </p>
+        </div>
+
+        <!-- Action & Bottom Grid Specs -->
+        <div class="md:col-span-4 flex flex-col md:items-end justify-between h-full gap-6 md:gap-0">
+          <div class="flex flex-col md:items-end gap-3" id="hero-cta">
+            <a href="#inquire" class="group relative inline-flex items-center justify-center px-8 py-4 bg-gold overflow-hidden transition-all duration-300">
+              <span class="absolute inset-0 w-0 h-full bg-carbon transition-all duration-300 ease-out group-hover:w-full"></span>
+              <span class="relative z-10 text-xs tracking-[0.25em] uppercase text-white font-semibold group-hover:text-gold">
+                Schedule Private Tour
+              </span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Divider Line -->
+      <div class="w-full h-[1px] bg-alabaster/10 mt-12 mb-8" id="hero-line"></div>
+
+      <!-- Quick specs preview -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-alabaster" id="hero-quick-specs">
+        <div class="flex flex-col gap-1">
+          <span class="text-[9px] tracking-widest text-gold uppercase">Living Area</span>
+          <span class="text-sm font-semibold tracking-wider font-mono">11,250 SQ. FT.</span>
+        </div>
+        <div class="flex flex-col gap-1">
+          <span class="text-[9px] tracking-widest text-gold uppercase">Lot Size</span>
+          <span class="text-sm font-semibold tracking-wider font-mono">2.4 ACRES</span>
+        </div>
+        <div class="flex flex-col gap-1">
+          <span class="text-[9px] tracking-widest text-gold uppercase">Bedrooms</span>
+          <span class="text-sm font-semibold tracking-wider font-mono">06 SUITES</span>
+        </div>
+        <div class="flex flex-col gap-1">
+          <span class="text-[9px] tracking-widest text-gold uppercase">Orientation</span>
+          <span class="text-sm font-semibold tracking-wider font-mono">WEST-FACING</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scroll Down indicator -->
+    <div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-10 cursor-pointer opacity-70 hover:opacity-100 transition-opacity duration-300" onclick="document.getElementById('narrative').scrollIntoView({behavior: 'smooth'})">
+      <span class="text-[8px] tracking-[0.3em] uppercase text-alabaster/80">Scroll to Explore</span>
+      <div class="w-[1px] h-8 bg-gradient-to-b from-gold to-transparent animate-pulse"></div>
+    </div>
+  </section>
+
+
+  <!-- ==================== ELEGANT NARRATIVE SECTION ==================== -->
+  <!-- HUMANISTIC DESIGN NOTE: Spacing optimized for architectural breathing room to replicate high-end publications. -->
+  <section id="narrative" class="py-24 md:py-36 bg-alabaster text-carbon overflow-hidden">
+    <div class="max-w-7xl mx-auto px-6 md:px-12">
+      <!-- 12-Column Layout -->
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-16 items-center">
+        
+        <!-- Left Side: Editorial Typography -->
+        <div class="md:col-span-6 flex flex-col gap-6" id="narrative-text-container">
+          <span class="text-[10px] tracking-[0.4em] text-gold uppercase font-semibold">THE ARCHITECTURAL VISION</span>
+          <h2 class="font-display text-4xl md:text-6xl font-light leading-[1.15] tracking-tight capitalize">
+            Suspended Between Pacific Tides and Coastal Sky
+          </h2>
+          <p class="text-sm md:text-base text-slate-700 leading-relaxed font-light">
+            Villa Solis represents a rare dialogue between brutalist integrity and coastal softness. The architecture utilizes sweeping cast-concrete structures that anchor deep into Malibu's shoreline granite, allowing cantilevered glass pavilions to float weightlessly above the surf.
+          </p>
+          <p class="text-sm md:text-base text-slate-700 leading-relaxed font-light">
+            Every room has been structured to capture the kinetic transition of Pacific light. Here, interior space dissolves completely into exterior vista, offering a lifestyle centered around organic rhythm, architectural silence, and raw coastal power.
+          </p>
+          <div class="flex items-center gap-4 mt-4">
+            <span class="h-[1px] w-12 bg-gold"></span>
+            <span class="font-display italic text-lg text-gold">Designed by Studio Ascend</span>
+          </div>
+        </div>
+
+        <!-- Right Side: Framed Architectural Shot with Parallax Scroll Hook -->
+        <div class="md:col-span-6 flex justify-center relative" id="narrative-image-wrapper">
+          <div class="w-full aspect-[4/5] bg-neutral-200 overflow-hidden relative border border-neutral-200/60 shadow-md">
+            <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=80" alt="Villa Solis Interior Living Room" class="w-full h-full object-cover scale-110" id="narrative-parallax-img">
+          </div>
+          <!-- Decorative Architectural coordinates tag -->
+          <div class="absolute bottom-[-24px] right-6 bg-carbon text-alabaster px-6 py-4 flex flex-col gap-1 rounded-sm shadow-lg">
+            <span class="text-[8px] tracking-[0.3em] uppercase text-gold">ARCHITECTURAL METRIC</span>
+            <span class="text-xs font-mono font-bold">4.2M FULL-HEIGHT GLAZING</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ==================== SPECIFICATIONS GRID ==================== -->
+  <section id="specs" class="py-24 md:py-32 bg-white text-carbon border-y border-neutral-200/60">
+    <div class="max-w-7xl mx-auto px-6 md:px-12">
+      <!-- Section Header -->
+      <div class="max-w-3xl mb-16 md:mb-24 flex flex-col gap-4">
+        <span class="text-[10px] tracking-[0.4em] text-gold uppercase font-semibold">Technical Manifesto</span>
+        <h2 class="font-display text-3xl md:text-5xl font-light tracking-tight capitalize leading-tight">
+          A Masterclass in Materiality & Design Engineering
+        </h2>
+        <p class="text-xs md:text-sm text-slate-500 leading-relaxed max-w-xl">
+          Every line, concrete pour, and custom steel fixture has been precision-designed to create a structure that is both emotionally grounding and structurally invulnerable.
+        </p>
+      </div>
+
+      <!-- The 12-Column Spec Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-stretch" id="specs-grid-container">
+        <!-- Big Feature Highlight Block -->
+        <div class="spec-card col-span-1 md:col-span-6 bg-[#FAF8F5] border border-neutral-200/60 p-10 flex flex-col justify-between hover:border-gold transition-colors duration-500 rounded-sm shadow-sm group">
+          <div class="flex flex-col gap-6">
+            <span class="text-gold">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" class="w-8 h-8">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3.75h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008z" />
+              </svg>
+            </span>
+            <h3 class="font-display text-2xl font-light tracking-tight text-carbon group-hover:text-gold transition-colors duration-300">
+              Architectural Geometry
+            </h3>
+            <p class="text-xs leading-relaxed text-slate-600">
+              Designed by famed modernist architect Marcus Vance, the structure relies on a cantilevered structural slab anchored directly into Malibu coastal granite. The result is a series of floating terraces that project over the shoreline, maximizing panoramic Pacific views.
+            </p>
+          </div>
+          <div class="border-t border-neutral-200 pt-6 mt-8 flex justify-between text-[10px] tracking-wider uppercase text-gold font-semibold">
+            <span>Structural Architect</span>
+            <span>Marcus Vance Studio</span>
+          </div>
+        </div>
+
+        <!-- Detail Grid Blocks -->
+        <div class="col-span-1 md:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <!-- Spec Block 1 -->
+          <div class="spec-card bg-[#FAF8F5] border border-neutral-200/60 p-8 flex flex-col justify-between hover:border-gold transition-colors duration-300 rounded-sm">
+            <h4 class="font-display text-lg font-light text-carbon mb-2">Oceanfront Frontage</h4>
+            <p class="text-xs text-slate-600 leading-relaxed mb-6">
+              200 linear feet of private, uninterrupted beach frontage directly below the cantilevered pool deck.
+            </p>
+            <span class="text-xl font-semibold tracking-wider text-gold font-mono">200 FT</span>
+          </div>
+          
+          <!-- Spec Block 2 -->
+          <div class="spec-card bg-[#FAF8F5] border border-neutral-200/60 p-8 flex flex-col justify-between hover:border-gold transition-colors duration-300 rounded-sm">
+            <h4 class="font-display text-lg font-light text-carbon mb-2">Thermal Glass Glazing</h4>
+            <p class="text-xs text-slate-600 leading-relaxed mb-6">
+              Triple-glazed low-emissivity floor-to-ceiling panels imported from Germany for climate and acoustic control.
+            </p>
+            <span class="text-xl font-semibold tracking-wider text-gold font-mono">TRIPLE PANELS</span>
+          </div>
+          
+          <!-- Spec Block 3 -->
+          <div class="spec-card bg-[#FAF8F5] border border-neutral-200/60 p-8 flex flex-col justify-between hover:border-gold transition-colors duration-300 rounded-sm">
+            <h4 class="font-display text-lg font-light text-carbon mb-2">Automated Smart Grid</h4>
+            <p class="text-xs text-slate-600 leading-relaxed mb-6">
+              Fully integrated Lutron lighting and Crestron environment control with voice and biometric activation.
+            </p>
+            <span class="text-xl font-semibold tracking-wider text-gold font-mono">CRESTRON ELITE</span>
+          </div>
+
+          <!-- Spec Block 4 -->
+          <div class="spec-card bg-[#FAF8F5] border border-neutral-200/60 p-8 flex flex-col justify-between hover:border-gold transition-colors duration-300 rounded-sm">
+            <h4 class="font-display text-lg font-light text-carbon mb-2">Wellness & Spa</h4>
+            <p class="text-xs text-slate-600 leading-relaxed mb-6">
+              Finnish cedar sauna, dedicated cold plunge basin, and a heated volcanic basalt saltwater infinity pool.
+            </p>
+            <span class="text-xl font-semibold tracking-wider text-gold font-mono">BASALT SALT</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ==================== INTERACTIVE FLOOR PLAN SECTION ==================== -->
+  <section id="layouts" class="py-24 md:py-32 bg-alabaster text-carbon">
+    <div class="max-w-7xl mx-auto px-6 md:px-12">
+      <!-- Header -->
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16 md:mb-24">
+        <div class="max-w-xl flex flex-col gap-4">
+          <span class="text-[10px] tracking-[0.4em] text-gold uppercase font-semibold">Space Specifications</span>
+          <h2 class="font-display text-3xl md:text-5xl font-light tracking-tight capitalize leading-tight">
+            Curated Architectural Configurations
+          </h2>
+        </div>
+        
+        <!-- Tabs Switcher Buttons -->
+        <div class="flex border-b border-neutral-200/80 pb-2 gap-8 md:gap-12">
+          <button class="layout-tab-btn active text-xs tracking-[0.2em] uppercase font-bold text-carbon hover:text-gold transition-colors relative py-1 focus:outline-none" data-target="one-bed">
+            I-Bedroom Suite
+            <span class="absolute bottom-[-9px] left-0 w-full h-[2px] bg-gold transition-transform duration-300 origin-left" id="active-bar-one-bed"></span>
+          </button>
+          <button class="layout-tab-btn text-xs tracking-[0.2em] uppercase font-bold text-[#4A4C50] hover:text-gold transition-colors relative py-1 focus:outline-none" data-target="two-bed">
+            II-Bedroom Residence
+            <span class="absolute bottom-[-9px] left-0 w-full h-[2px] bg-gold transition-transform duration-300 scale-x-0 origin-left" id="active-bar-two-bed"></span>
+          </button>
+          <button class="layout-tab-btn text-xs tracking-[0.2em] uppercase font-bold text-[#4A4C50] hover:text-gold transition-colors relative py-1 focus:outline-none" data-target="penthouse">
+            The Grand Penthouse
+            <span class="absolute bottom-[-9px] left-0 w-full h-[2px] bg-gold transition-transform duration-300 scale-x-0 origin-left" id="active-bar-penthouse"></span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Switcher Panels Content -->
+      <div class="relative min-h-[500px]">
+        
+        <!-- Panel 1: 1-Bedroom -->
+        <div class="layout-panel grid grid-cols-1 md:grid-cols-12 gap-12 items-center active" id="panel-one-bed">
+          <!-- Specs Column -->
+          <div class="md:col-span-5 flex flex-col gap-8">
+            <div class="flex flex-col gap-2">
+              <h3 class="font-display text-2xl md:text-3xl font-light">The Atelier Suite (Type A)</h3>
+              <p class="text-xs text-[#4A4C50] leading-relaxed">
+                Designed for visual artists and urban executives. Features a central open-concept gallery layout, polished travertine flooring, and dual north-facing Juliette balconies.
+              </p>
+            </div>
+            <div class="grid grid-cols-2 gap-6 border-y border-neutral-200/60 py-6">
+              <div>
+                <span class="block text-[9px] tracking-widest text-gold uppercase mb-1">Total Space</span>
+                <span class="text-base font-semibold tracking-wider font-mono">1,120 SQ. FT.</span>
+              </div>
+              <div>
+                <span class="block text-[9px] tracking-widest text-gold uppercase mb-1">Ceiling Height</span>
+                <span class="text-base font-semibold tracking-wider font-mono">11 FT. CLEAR</span>
+              </div>
+              <div>
+                <span class="block text-[9px] tracking-widest text-gold uppercase mb-1">Exposure</span>
+                <span class="text-base font-semibold tracking-wider font-mono">NORTH / EAST</span>
+              </div>
+              <div>
+                <span class="block text-[9px] tracking-widest text-gold uppercase mb-1">Price Range</span>
+                <span class="text-base font-semibold tracking-wider font-mono">FROM $1.25M</span>
+              </div>
+            </div>
+            <a href="#inquire" class="group inline-flex items-center gap-3 text-xs tracking-[0.2em] uppercase font-bold text-carbon hover:text-gold transition-colors duration-300">
+              Request Floorplan Portfolio
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+              </svg>
+            </a>
+          </div>
+          <!-- Floorplan Canvas Column -->
+          <div class="md:col-span-7 bg-white border border-neutral-200/60 p-8 flex items-center justify-center rounded-sm shadow-sm relative overflow-hidden group min-h-[400px]">
+            <svg viewBox="0 0 800 500" class="w-full h-auto max-h-[380px] text-carbon/80 font-mono" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path stroke-dasharray="2,5" stroke="rgba(24,25,27,0.1)" d="M 0,100 L 800,100 M 0,200 L 800,200 M 0,300 L 800,300 M 0,400 L 800,400 M 100,0 L 100,500 M 200,0 L 200,500 M 300,0 L 300,500 M 400,0 L 400,500 M 500,0 L 500,500 M 600,0 L 600,500 M 700,0 L 700,500" />
+              <rect x="150" y="80" width="500" height="340" stroke-width="3" />
+              <line x1="450" y1="80" x2="450" y2="420" />
+              <line x1="150" y1="260" x2="450" y2="260" />
+              <line x1="320" y1="260" x2="320" y2="420" />
+              <path d="M 450,140 A 60,60 0 0,1 510,200" stroke-dasharray="3,3" />
+              <line x1="450" y1="140" x2="450" y2="200" />
+              <text x="300" y="170" text-anchor="middle" font-size="10" letter-spacing="2" fill="#C5A880" stroke="none">LIVING & GALLERY</text>
+              <text x="235" y="340" text-anchor="middle" font-size="10" letter-spacing="2" stroke="none">KITCHEN</text>
+              <text x="385" y="340" text-anchor="middle" font-size="10" letter-spacing="2" stroke="none">BATH</text>
+              <text x="550" y="250" text-anchor="middle" font-size="10" letter-spacing="2" fill="#C5A880" stroke="none">PRIMARY SUITE</text>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Panel 2: 2-Bedroom -->
+        <div class="layout-panel grid grid-cols-1 md:grid-cols-12 gap-12 items-center hidden" id="panel-two-bed">
+          <!-- Specs Column -->
+          <div class="md:col-span-5 flex flex-col gap-8">
+            <div class="flex flex-col gap-2">
+              <h3 class="font-display text-2xl md:text-3xl font-light">The Meridian Residence (Type B)</h3>
+              <p class="text-xs text-[#4A4C50] leading-relaxed">
+                Designed for modern families desiring elevated privacy. Features a split-bedroom layout, custom white oak millwork, walk-in closets, and an expansive sunset-facing glass terrace.
+              </p>
+            </div>
+            <div class="grid grid-cols-2 gap-6 border-y border-neutral-200/60 py-6">
+              <div>
+                <span class="block text-[9px] tracking-widest text-gold uppercase mb-1">Total Space</span>
+                <span class="text-base font-semibold tracking-wider font-mono">1,890 SQ. FT.</span>
+              </div>
+              <div>
+                <span class="block text-[9px] tracking-widest text-gold uppercase mb-1">Ceiling Height</span>
+                <span class="text-base font-semibold tracking-wider font-mono">11.5 FT. CLEAR</span>
+              </div>
+              <div>
+                <span class="block text-[9px] tracking-widest text-gold uppercase mb-1">Exposure</span>
+                <span class="text-base font-semibold tracking-wider font-mono">WEST / SOUTH</span>
+              </div>
+              <div>
+                <span class="block text-[9px] tracking-widest text-gold uppercase mb-1">Price Range</span>
+                <span class="text-base font-semibold tracking-wider font-mono">FROM $2.10M</span>
+              </div>
+            </div>
+            <a href="#inquire" class="group inline-flex items-center gap-3 text-xs tracking-[0.2em] uppercase font-bold text-carbon hover:text-gold transition-colors duration-300">
+              Request Floorplan Portfolio
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+              </svg>
+            </a>
+          </div>
+          <!-- Floorplan Canvas Column -->
+          <div class="md:col-span-7 bg-white border border-neutral-200/60 p-8 flex items-center justify-center rounded-sm shadow-sm relative overflow-hidden min-h-[400px]">
+            <svg viewBox="0 0 800 500" class="w-full h-auto max-h-[380px] text-carbon/80 font-mono" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path stroke-dasharray="2,5" stroke="rgba(24,25,27,0.1)" d="M 0,100 L 800,100 M 0,200 L 800,200 M 0,300 L 800,300 M 0,400 L 800,400 M 100,0 L 100,500 M 200,0 L 200,500" />
+              <rect x="100" y="60" width="600" height="380" stroke-width="3" />
+              <line x1="300" y1="60" x2="300" y2="440" />
+              <line x1="500" y1="60" x2="500" y2="440" />
+              <line x1="300" y1="240" x2="500" y2="240" />
+              <line x1="100" y1="280" x2="300" y2="280" />
+              <text x="200" y="170" text-anchor="middle" font-size="10" letter-spacing="2" fill="#C5A880" stroke="none">PRIMARY SUITE</text>
+              <text x="200" y="360" text-anchor="middle" font-size="10" letter-spacing="2" stroke="none">BATH & SPA</text>
+              <text x="400" y="150" text-anchor="middle" font-size="10" letter-spacing="2" fill="#C5A880" stroke="none">SALON & LOUNGE</text>
+              <text x="400" y="340" text-anchor="middle" font-size="10" letter-spacing="2" stroke="none">DINING ROOM</text>
+              <text x="600" y="250" text-anchor="middle" font-size="10" letter-spacing="2" fill="#C5A880" stroke="none">SUITE II</text>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Panel 3: Penthouse -->
+        <div class="layout-panel grid grid-cols-1 md:grid-cols-12 gap-12 items-center hidden" id="panel-penthouse">
+          <!-- Specs Column -->
+          <div class="md:col-span-5 flex flex-col gap-8">
+            <div class="flex flex-col gap-2">
+              <h3 class="font-display text-2xl md:text-3xl font-light">The Crown Penthouse (Type PH)</h3>
+              <p class="text-xs text-[#4A4C50] leading-relaxed">
+                Occupying the absolute apex of the tower. Featuring direct private elevator vestibules, wrapped sky terraces, full-height floor-to-ceiling perimeter glazing, and an outdoor horizon pool.
+              </p>
+            </div>
+            <div class="grid grid-cols-2 gap-6 border-y border-neutral-200/60 py-6">
+              <div>
+                <span class="block text-[9px] tracking-widest text-gold uppercase mb-1">Total Space</span>
+                <span class="text-base font-semibold tracking-wider font-mono">3,450 SQ. FT.</span>
+              </div>
+              <div>
+                <span class="block text-[9px] tracking-widest text-gold uppercase mb-1">Ceiling Height</span>
+                <span class="text-base font-semibold tracking-wider font-mono">14 FT. CLEAR</span>
+              </div>
+              <div>
+                <span class="block text-[9px] tracking-widest text-gold uppercase mb-1">Exposure</span>
+                <span class="text-base font-semibold tracking-wider font-mono">360° PANORAMA</span>
+              </div>
+              <div>
+                <span class="block text-[9px] tracking-widest text-gold uppercase mb-1">Price Range</span>
+                <span class="text-base font-semibold tracking-wider font-mono">FROM $4.95M</span>
+              </div>
+            </div>
+            <a href="#inquire" class="group inline-flex items-center gap-3 text-xs tracking-[0.2em] uppercase font-bold text-carbon hover:text-gold transition-colors duration-300">
+              Request Floorplan Portfolio
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+              </svg>
+            </a>
+          </div>
+          <!-- Floorplan Canvas Column -->
+          <div class="md:col-span-7 bg-white border border-neutral-200/60 p-8 flex items-center justify-center rounded-sm shadow-sm relative overflow-hidden min-h-[400px]">
+            <svg viewBox="0 0 800 500" class="w-full h-auto max-h-[380px] text-carbon/80 font-mono" fill="none" stroke="currentColor" stroke-width="1.5">
+              <circle cx="400" cy="250" r="180" stroke-width="3" />
+              <path stroke-dasharray="2,5" stroke="rgba(24,25,27,0.1)" d="M 0,100 L 800,100 M 0,200 L 800,200 M 0,300 L 800,300 M 0,400 L 800,400 M 100,0 L 100,500 M 200,0 L 200,500 M 300,0 L 300,500 M 400,0 L 400,500 M 500,0 L 500,500 M 600,0 L 600,500 M 700,0 L 700,500" stroke-width="0.5" />
+              <line x1="400" y1="70" x2="400" y2="430" />
+              <line x1="220" y1="250" x2="580" y2="250" />
+              <text x="400" y="160" text-anchor="middle" font-size="10" letter-spacing="2" fill="#C5A880" stroke="none">GRAND SALON</text>
+              <text x="310" y="320" text-anchor="middle" font-size="10" letter-spacing="2" stroke="none">KITCHEN</text>
+              <text x="490" y="320" text-anchor="middle" font-size="10" letter-spacing="2" stroke="none">PRIMARY ATELIER</text>
+              <text x="400" y="405" text-anchor="middle" font-size="10" letter-spacing="2" fill="#C5A880" stroke="none">SKY DECK & POOL</text>
+            </svg>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ==================== PRIVATE INQUIRY FORM ==================== -->
+  <section id="inquire" class="py-24 md:py-32 bg-white text-carbon border-t border-neutral-200/60">
+    <div class="max-w-4xl mx-auto px-6">
+      <div class="text-center max-w-xl mx-auto mb-16">
+        <span class="text-[10px] tracking-[0.4em] text-gold uppercase font-semibold">Inquire Registry</span>
+        <h2 class="font-display text-3xl md:text-4xl font-light tracking-tight capitalize leading-tight mt-2">
+          Arrange an Private View
+        </h2>
+        <p class="text-xs text-slate-500 mt-2">
+          Private viewing appointments are reserved for registered clients. Please provide your contact credentials below to coordinate with our concierge.
+        </p>
+      </div>
+
+      <form class="flex flex-col gap-8 md:gap-10" id="inquiry-form">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <!-- Full Name -->
+          <div class="relative border-b border-neutral-300 pb-2 group">
+            <label for="inq-name" class="block text-[9px] tracking-widest text-[#4A4C50] uppercase mb-1 font-semibold">Full Name</label>
+            <input type="text" id="inq-name" placeholder="E.g., Catherine DuPont" class="w-full bg-transparent text-sm text-carbon placeholder-neutral-400/80 outline-none py-1 focus:placeholder-transparent" required>
+            <div class="absolute bottom-[-1px] left-0 w-0 h-[1px] bg-gold transition-all duration-300 group-focus-within:w-full"></div>
+          </div>
+
+          <!-- Direct Email -->
+          <div class="relative border-b border-neutral-300 pb-2 group">
+            <label for="inq-email" class="block text-[9px] tracking-widest text-[#4A4C50] uppercase mb-1 font-semibold">Direct Email</label>
+            <input type="email" id="inq-email" placeholder="E.g., catherine@dupontcapital.com" class="w-full bg-transparent text-sm text-carbon placeholder-neutral-400/80 outline-none py-1 focus:placeholder-transparent" required>
+            <div class="absolute bottom-[-1px] left-0 w-0 h-[1px] bg-gold transition-all duration-300 group-focus-within:w-full"></div>
+          </div>
+        </div>
+
+        <!-- Message -->
+        <div class="relative border-b border-neutral-300 pb-2 group">
+          <label for="inq-message" class="block text-[9px] tracking-widest text-[#4A4C50] uppercase mb-1 font-semibold">Desired Timing & Accompaniments</label>
+          <textarea id="inq-message" rows="3" placeholder="Share any specific dates or dietary requirements for your private viewing tour..." class="w-full bg-transparent text-sm text-carbon placeholder-neutral-400/80 outline-none py-1 resize-none focus:placeholder-transparent"></textarea>
+          <div class="absolute bottom-[-1px] left-0 w-0 h-[1px] bg-gold transition-all duration-300 group-focus-within:w-full"></div>
+        </div>
+
+        <div class="flex justify-center mt-6">
+          <button type="submit" class="group relative px-12 py-4 bg-carbon overflow-hidden transition-all duration-500 hover:bg-gold">
+            <span class="relative z-10 text-[10px] tracking-[0.25em] uppercase text-white font-bold">
+              Submit Private Inquiry
+            </span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="bg-alabaster border-t border-neutral-200/60 pt-24 pb-12 text-carbon">
+    <div class="max-w-7xl mx-auto px-6 md:px-12 grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8 mb-20">
+      
+      <!-- Branding & Manifesto -->
+      <div class="col-span-1 md:col-span-4 flex flex-col gap-6">
+        <div class="flex items-center gap-3">
+          <span class="font-display text-2xl tracking-[0.25em] text-carbon">APEX</span>
+          <span class="text-[9px] tracking-[0.4em] text-gold uppercase mt-1">Estates</span>
+        </div>
+        <p class="text-xs leading-relaxed text-[#4A4C50] max-w-sm">
+          Curators of architectural sanctuaries and high-end residential listings. We represent exclusive properties that merge structural ingenuity with refined lifestyle designs.
+        </p>
+        <span class="text-[10px] tracking-[0.2em] uppercase text-gold font-semibold mt-2">
+          ESTABLISHED IN MMXXVI
+        </span>
+      </div>
+
+      <!-- Navigation & Directory -->
+      <div class="col-span-1 md:col-span-2 flex flex-col gap-5">
+        <h4 class="text-[10px] tracking-[0.25em] uppercase font-bold text-carbon">Directory</h4>
+        <div class="flex flex-col gap-3">
+          <a href="index.html" class="text-xs text-[#4A4C50] hover:text-gold transition-colors duration-300">Villa Solis</a>
+          <a href="broker-funnel.html" class="text-xs text-[#4A4C50] hover:text-gold transition-colors duration-300">Private Brokerage</a>
+          <a href="pre-construction.html" class="text-xs text-[#4A4C50] hover:text-gold transition-colors duration-300">The Obsidian Condo</a>
+          <a href="#" class="text-xs text-[#4A4C50] hover:text-gold transition-colors duration-300">Press & Media</a>
+        </div>
+      </div>
+
+      <!-- Offices / Locations -->
+      <div class="col-span-1 md:col-span-3 flex flex-col gap-5">
+        <h4 class="text-[10px] tracking-[0.25em] uppercase font-bold text-carbon">Sanctuaries</h4>
+        <div class="flex flex-col gap-4 text-xs text-[#4A4C50]">
+          <div>
+            <span class="block font-semibold text-carbon text-[10px] tracking-wider uppercase mb-1">Malibu Sanctuary</span>
+            <p>23405 Pacific Coast Hwy, Malibu, CA 90265</p>
+          </div>
+          <div>
+            <span class="block font-semibold text-carbon text-[10px] tracking-wider uppercase mb-1">Manhattan Atelier</span>
+            <p>730 Fifth Ave, 18th Floor, New York, NY 10019</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Inquiries & Newsletter -->
+      <div class="col-span-1 md:col-span-3 flex flex-col gap-5">
+        <h4 class="text-[10px] tracking-[0.25em] uppercase font-bold text-carbon">Inquiries</h4>
+        <p class="text-xs text-[#4A4C50] leading-relaxed">
+          Subscribe to receive private catalogs of off-market architectural listings.
+        </p>
+        <form class="flex flex-col gap-2">
+          <div class="relative border-b border-carbon pb-2">
+            <input type="email" placeholder="Your Email Address" class="w-full bg-transparent text-xs text-carbon placeholder-neutral-400/80 outline-none pr-8 py-1" required>
+            <button type="submit" class="absolute right-0 top-1/2 -translate-y-1/2 hover:text-gold transition-colors duration-300" aria-label="Submit Email">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" class="w-4 h-4">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+              </svg>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Copyright & Social Links -->
+    <div class="max-w-7xl mx-auto px-6 md:px-12 border-t border-neutral-200/60 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
+      <p class="text-[10px] text-[#4A4C50] tracking-wider">
+        &copy; 2026 APEX ESTATES. ALL RIGHTS RESERVED. DESIGNED FOR ARCHITECTURAL SANCTUARIES.
+      </p>
+      <div class="flex items-center gap-6">
+        <a href="#" class="text-xs text-[#4A4C50] hover:text-gold tracking-widest uppercase transition-colors duration-300">IG</a>
+        <a href="#" class="text-xs text-[#4A4C50] hover:text-gold tracking-widest uppercase transition-colors duration-300">IN</a>
+        <a href="#" class="text-xs text-[#4A4C50] hover:text-gold tracking-widest uppercase transition-colors duration-300">YT</a>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- ==================== SCRIPTS & INTERACTION ENGINE ==================== -->
+  <script>
+    // HEADER SCROLL TRANSITION
+    window.addEventListener('scroll', () => {
+      const header = document.getElementById('main-header');
+      const logo = document.getElementById('header-logo');
+      const navItems = document.querySelectorAll('.header-nav-item');
+      const btn = document.getElementById('header-btn');
+      const btnText = document.getElementById('header-btn-text');
+      const menuLines = document.querySelectorAll('.mobile-menu-line');
+
+      if (window.scrollY > 50) {
+        header.classList.remove('py-8', 'border-transparent');
+        header.classList.add('py-4', 'bg-alabaster/90', 'backdrop-blur-md', 'border-neutral-200/50', 'shadow-sm');
+        
+        if (logo) logo.src = 'assets/logo-dark.svg';
+        
+        navItems.forEach(item => {
+          item.classList.remove('text-[#FAF8F5]/80');
+          item.classList.add('text-carbon');
+        });
+        
+        btn.classList.remove('border-[#FAF8F5]');
+        btn.classList.add('border-carbon');
+        
+        btnText.classList.remove('text-[#FAF8F5]');
+        btnText.classList.add('text-carbon');
+        
+        menuLines.forEach(line => {
+          line.classList.remove('bg-[#FAF8F5]');
+          line.classList.add('bg-carbon');
+        });
+      } else {
+        header.classList.remove('py-4', 'bg-alabaster/90', 'backdrop-blur-md', 'border-neutral-200/50', 'shadow-sm');
+        header.classList.add('py-8', 'border-transparent');
+        
+        if (logo) logo.src = 'assets/logo-light.svg';
+        
+        navItems.forEach(item => {
+          item.classList.add('text-[#FAF8F5]/80');
+          item.classList.remove('text-carbon');
+        });
+        
+        btn.classList.add('border-[#FAF8F5]');
+        btn.classList.remove('border-carbon');
+        
+        btnText.classList.add('text-[#FAF8F5]');
+        btnText.classList.remove('text-carbon');
+        
+        menuLines.forEach(line => {
+          line.classList.add('bg-[#FAF8F5]');
+          line.classList.remove('bg-carbon');
+        });
+      }
+    });
+
+    // MOBILE MENU
+    const mobileBtn = document.getElementById('mobile-menu-btn');
+    const mobileDrawer = document.getElementById('mobile-drawer');
+    if (mobileBtn && mobileDrawer) {
+      mobileBtn.addEventListener('click', () => {
+        mobileBtn.classList.toggle('menu-open');
+        const isOpen = mobileDrawer.classList.toggle('translate-x-full');
+        if (!isOpen) {
+          document.body.classList.add('overflow-hidden');
+        } else {
+          document.body.classList.remove('overflow-hidden');
+        }
+      });
+
+      // Close menu and enable scroll when clicking links
+      const drawerLinks = mobileDrawer.querySelectorAll('a');
+      drawerLinks.forEach(link => {
+        link.addEventListener('click', () => {
+          mobileBtn.classList.remove('menu-open');
+          mobileDrawer.classList.add('translate-x-full');
+          document.body.classList.remove('overflow-hidden');
+        });
+      });
+    }
+
+    // FORM ALERT
+    document.getElementById("inquiry-form").addEventListener("submit", (e) => {
+      e.preventDefault();
+      alert("Thank you. Your request for a private viewing at Villa Solis has been registered.");
+      e.target.reset();
+    });
+
+    // FLOOR PLAN SWITCHER PANEL SWITCHING
+    const tabs = document.querySelectorAll(".layout-tab-btn");
+    const panels = document.querySelectorAll(".layout-panel");
+
+    tabs.forEach(tab => {
+      tab.addEventListener("click", () => {
+        const target = tab.dataset.target;
+
+        tabs.forEach(t => {
+          t.classList.remove("active", "text-carbon");
+          t.classList.add("text-[#4A4C50]");
+          const bar = t.querySelector("span");
+          if (bar) bar.classList.add("scale-x-0");
+        });
+
+        tab.classList.add("active", "text-carbon");
+        tab.classList.remove("text-[#4A4C50]");
+        const activeBar = tab.querySelector("span");
+        if (activeBar) activeBar.classList.remove("scale-x-0");
+
+        panels.forEach(panel => {
+          if (panel.id === `panel-${target}`) {
+            panel.classList.remove("hidden");
+            panel.classList.add("grid");
+            if (typeof gsap !== 'undefined') {
+              gsap.fromTo(panel, { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" });
+            }
+          } else {
+            panel.classList.remove("grid");
+            panel.classList.add("hidden");
+          }
+        });
+      });
+    });
+
+    // GSAP MICRO-INTERACTIONS (SCROLL-TRIGGERED FADES & PARALLAX HOVER)
+    document.addEventListener("DOMContentLoaded", () => {
+      if (typeof gsap !== 'undefined') {
+        gsap.registerPlugin(ScrollTrigger);
+
+        // 1. Hero Entrance Timelines
+        const tl = gsap.timeline({ defaults: { ease: "power4.out", duration: 1.5 } });
+        tl.to("#hero-bg-container", { scale: 1, duration: 2.2 })
+          .to("#hero-tagline", { opacity: 1, y: 0, duration: 1 }, "-=1.8")
+          .from("#hero-title", { y: 80, opacity: 0, duration: 1.2 }, "-=1.5")
+          .from("#hero-subtitle", { y: 30, opacity: 0, duration: 1 }, "-=1.2")
+          .from("#hero-cta", { y: 30, opacity: 0, duration: 1 }, "-=1.2")
+          .from("#hero-line", { scaleX: 0, transformOrigin: "left center", duration: 1 }, "-=1.0")
+          .from("#hero-quick-specs div", { y: 20, opacity: 0, stagger: 0.1, duration: 0.8 }, "-=0.8");
+
+        // 2. Narrative Section Scroll Reveal
+        gsap.from("#narrative-text-container > *", {
+          y: 40,
+          opacity: 0,
+          stagger: 0.15,
+          duration: 1.2,
+          scrollTrigger: {
+            trigger: "#narrative",
+            start: "top 75%",
+            toggleActions: "play none none reverse"
+          }
+        });
+
+        // 3. Narrative Image Parallax Zoom on Scroll
+        gsap.to("#narrative-parallax-img", {
+          yPercent: -12,
+          ease: "none",
+          scrollTrigger: {
+            trigger: "#narrative",
+            start: "top bottom",
+            end: "bottom top",
+            scrub: true
+          }
+        });
+
+        // 4. Specs Section Cards Reveal
+        gsap.from("#specs .spec-card", {
+          y: 50,
+          opacity: 0,
+          stagger: 0.15,
+          duration: 1,
+          scrollTrigger: {
+            trigger: "#specs",
+            start: "top 80%",
+            toggleActions: "play none none reverse"
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>

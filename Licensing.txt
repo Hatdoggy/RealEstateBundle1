@@ -1,0 +1,25 @@
+APEX ESTATES - LICENSING & THIRD-PARTY ASSETS
+
+This document details the licensing and attributions for all third-party libraries, fonts, and assets utilized in the Apex Estates website templates.
+
+---
+
+1. FONTS
+- Cormorant Garamond: Distributed under the SIL Open Font License (OFL). Available on Google Fonts (https://fonts.google.com/specimen/Cormorant+Garamond).
+- Plus Jakarta Sans: Distributed under the SIL Open Font License (OFL). Available on Google Fonts (https://fonts.google.com/specimen/Plus+Jakarta+Sans).
+
+---
+
+2. SCRIPTS & FRAMEWORKS
+- Tailwind CSS (CDN version): Licensed under the MIT License. Copyright (c) Tailwind Labs, Inc.
+- GreenSock Animation Platform (GSAP & ScrollTrigger): Standard public license for standard static templates. For high-volume paid web platforms or commercial SaaS applications, check the GreenSock Commercial License (https://greensock.com/licensing/).
+
+---
+
+3. IMAGES & PHOTOGRAPHY
+All images used in this project are retrieved from Unsplash and are licensed under the Unsplash License (free to use for commercial and non-commercial purposes, no attribution required but appreciated).
+- Villa Solis Exterior: Photo by Avi Werde (https://unsplash.com/photos/hMP442742980)
+- Luxury Living Room: Photo by Spacejoy (https://unsplash.com/photos/q24418)
+- Elena Vance Portrait: Photo by Christina @ wocintechchat.com (https://unsplash.com/photos/573496359142)
+- Luxury Interior Room: Photo by R-Architecture (https://unsplash.com/photos/1600607687920)
+- Pre-Construction Tower Render: Photo by London Tower Gallery (https://unsplash.com/photos/1545324418)

@@ -1,0 +1,93 @@
+<!-- CINEMATIC HERO HEADER COMPONENT -->
+<section class="relative w-full h-screen bg-[#18191B] overflow-hidden flex items-center justify-center">
+  <!-- Hero Background Image with Parallax & Dark Overlay -->
+  <div class="absolute inset-0 z-0 scale-110 overflow-hidden" id="hero-bg-container">
+    <!-- Image source: high-end modern concrete architectural home -->
+    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=2000&q=80" alt="Villa Solis Exterior" class="w-full h-full object-cover object-center opacity-40 transition-transform duration-700 ease-out hover:scale-105">
+    <div class="absolute inset-0 bg-gradient-to-t from-[#18191B] via-transparent to-[#18191B]/50"></div>
+  </div>
+
+  <!-- Hero Content Grid -->
+  <div class="relative z-10 max-w-7xl mx-auto px-6 md:px-12 w-full h-full flex flex-col justify-end pb-20 md:pb-24">
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-end">
+      <!-- Titles & Branding -->
+      <div class="md:col-span-8 flex flex-col items-start gap-4">
+        <!-- Coordinates & Subtle Tag -->
+        <div class="flex items-center gap-4 animate-fade-in opacity-0" id="hero-tagline">
+          <span class="text-[10px] tracking-[0.4em] text-[#C5A880] uppercase font-semibold">MALIBU, CALIFORNIA</span>
+          <span class="w-8 h-[1px] bg-[#C5A880]/50"></span>
+          <span class="text-[9px] tracking-[0.25em] text-[#FAF8F5]/60 uppercase font-mono">34.0259° N, 118.7798° W</span>
+        </div>
+        
+        <!-- Massive Editorial Headline -->
+        <h1 class="font-display text-4xl sm:text-6xl md:text-8xl text-[#FAF8F5] leading-[1.05] tracking-tight font-light capitalize max-w-4xl" id="hero-title">
+          VILLA SOLIS
+        </h1>
+        
+        <!-- Subtitle -->
+        <p class="text-sm md:text-lg text-[#FAF8F5]/80 max-w-xl font-light leading-relaxed mt-2" id="hero-subtitle">
+          An architectural sanctuary crafted by Studio Ascend. Constructed from cast concrete, raw limestone, and glass, suspended over the Pacific.
+        </p>
+      </div>
+
+      <!-- Action & Bottom Grid Specs -->
+      <div class="md:col-span-4 flex flex-col md:items-end justify-between h-full gap-6 md:gap-0">
+        <!-- Inquire Callout -->
+        <div class="flex flex-col md:items-end gap-3" id="hero-cta">
+          <a href="#inquire" class="group relative inline-flex items-center justify-center px-8 py-4 bg-[#C5A880] overflow-hidden transition-all duration-300">
+            <span class="absolute inset-0 w-0 h-full bg-[#18191B] transition-all duration-300 ease-out group-hover:w-full"></span>
+            <span class="relative z-10 text-xs tracking-[0.25em] uppercase text-white font-semibold group-hover:text-[#C5A880]">
+              Schedule Private Tour
+            </span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Divider Line -->
+    <div class="w-full h-[1px] bg-[#FAF8F5]/10 mt-12 mb-8" id="hero-line"></div>
+
+    <!-- Quick specs preview -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-[#FAF8F5]" id="hero-quick-specs">
+      <div class="flex flex-col gap-1">
+        <span class="text-[9px] tracking-widest text-[#C5A880] uppercase">Living Area</span>
+        <span class="text-sm font-semibold tracking-wider font-mono">11,250 SQ. FT.</span>
+      </div>
+      <div class="flex flex-col gap-1">
+        <span class="text-[9px] tracking-widest text-[#C5A880] uppercase">Lot Size</span>
+        <span class="text-sm font-semibold tracking-wider font-mono">2.4 ACRES</span>
+      </div>
+      <div class="flex flex-col gap-1">
+        <span class="text-[9px] tracking-widest text-[#C5A880] uppercase">Bedrooms</span>
+        <span class="text-sm font-semibold tracking-wider font-mono">06 SUITES</span>
+      </div>
+      <div class="flex flex-col gap-1">
+        <span class="text-[9px] tracking-widest text-[#C5A880] uppercase">Orientation</span>
+        <span class="text-sm font-semibold tracking-wider font-mono">WEST-FACING</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll Down indicator -->
+  <div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-10 cursor-pointer opacity-70 hover:opacity-100 transition-opacity duration-300" onclick="document.getElementById('narrative').scrollIntoView({behavior: 'smooth'})">
+    <span class="text-[8px] tracking-[0.3em] uppercase text-[#FAF8F5]/80">Scroll to Explore</span>
+    <div class="w-[1px] h-8 bg-gradient-to-b from-[#C5A880] to-transparent animate-pulse"></div>
+  </div>
+</section>
+
+<script>
+  // GSAP animations for the Hero Section
+  document.addEventListener("DOMContentLoaded", () => {
+    if (typeof gsap !== 'undefined') {
+      const tl = gsap.timeline({ defaults: { ease: "power4.out", duration: 1.5 } });
+      
+      tl.to("#hero-bg-container", { scale: 1, duration: 2 })
+        .to("#hero-tagline", { opacity: 1, y: 0, duration: 1 }, "-=1.5")
+        .from("#hero-title", { y: 100, opacity: 0, duration: 1.2 }, "-=1.2")
+        .from("#hero-subtitle", { y: 30, opacity: 0, duration: 1 }, "-=1.0")
+        .from("#hero-cta", { y: 30, opacity: 0, duration: 1 }, "-=1.0")
+        .from("#hero-line", { scaleX: 0, transformOrigin: "left center", duration: 1 }, "-=0.8")
+        .from("#hero-quick-specs div", { y: 20, opacity: 0, stagger: 0.1, duration: 0.8 }, "-=0.6");
+    }
+  });
+</script>
